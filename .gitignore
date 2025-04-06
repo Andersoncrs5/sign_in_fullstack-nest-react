@@ -1,0 +1,15 @@
+# Geral
+node_modules/
+.env
+
+# Backend
+sign-in-nest/node_modules
+sign-in-nest/.env
+
+# Frontend
+frontend/node_modules
+frontend/.env
+
+# Compilados
+dist/
+build/
