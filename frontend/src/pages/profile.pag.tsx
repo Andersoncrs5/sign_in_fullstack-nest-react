@@ -23,7 +23,22 @@ export default function Profile() {
     async function getUser() {
         try {
             const response = await api.get('users/me'); 
-            setUser(response.data);
+
+            if (response.status == 500 ) {
+                alert('system unavailable try again later');
+            }
+
+            if (response.status == 400 ) {
+                alert('Error the pass the id');
+            }
+
+            if (response.status == 404 ) {
+                back();
+            }
+
+            if (response.status == 200) {
+                setUser(response.data);
+            }
         } catch (error: any) {
             console.error("Erro:", error);
             if (error.response) {
@@ -45,6 +60,14 @@ export default function Profile() {
         try {
             const response: AxiosResponse<any, any> = await api.delete('users');
             
+            if (response.status == 500 ) {
+                alert('system unavailable try again later');
+            }
+
+            if (response.status == 404 ) {
+                alert('User not found');
+            }
+
             if (response.status === 200){
                 localStorage.clear();
                 nav('/');

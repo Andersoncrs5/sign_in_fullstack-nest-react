@@ -42,16 +42,28 @@ export default function Register() {
             };
 
             const response: AxiosResponse<any, any> = await api.post('/users', user);
-            console.log(response.data);
             
+            if (response.status == 500 ) {
+                alert('system unavailable try again later');
+            }
+
+            if (response.status == 409 ) {
+                alert('Email is used!');
+            }
+            
+            if (response.status == 404 ) {
+                alert('Error registering user. Please try a login!');
+            }
+
             if (response.status == 201) {
                 localStorage.setItem("token", response.data.access_token);
                 localStorage.setItem("refreshToken", response.data.refresh_token);
-            }
 
-            alert("Usuário cadastrado com sucesso!");
-            clearForm();
-            nav('/home')
+                alert("Usuário cadastrado com sucesso!");
+                clearForm();
+                nav('/home')
+            }
+            
         } catch (err) {
             console.error(err);
             alert("Erro ao cadastrar");

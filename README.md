@@ -1,9 +1,23 @@
 # sign_in_fullstack-nest-react
 
-project fullstack with react, nestjs and postgresql
+A fullstack authentication system built with React, NestJS (with Fastify), and PostgreSQL, using Bun as the JavaScript runtime.
 
-using :
+## Features:
 
-- postgresql
-- nestjs with typescript and fastify
-- react with bun
+    User sign up and sign in flow
+
+    Fullstack integration with secure API endpoints
+
+    Backend built with NestJS and Fastify for high performance
+
+    Frontend developed using React with Bun runtime
+
+    Data stored and managed with PostgreSQL
+
+    Modern and efficient development stack
+
+    axios
+
+    jwt
+
+Ideal for learning and demonstrating fullstack development with modern tools.

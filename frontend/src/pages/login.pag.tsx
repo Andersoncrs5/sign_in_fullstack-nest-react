@@ -42,16 +42,24 @@ export default function LoginPag() {
 
             const response: AxiosResponse<any, any> = await api.post('users/login', user)
 
-            console.log(response);
+            if (response.status == 500) {
+                alert('Error! Please try again later');
+                return;
+            }
+
+            if (response.status == 401) {
+                alert('Datas invalids');
+                return;
+            }
 
             if (response.status == 200) {
                 localStorage.setItem("token", response.data.access_token);
                 localStorage.setItem("refreshToken", response.data.refresh_token);
-            }
 
-            alert("Welcome again!");
-            clearForm();
-            nav('/home')
+                alert("Welcome again!");
+                clearForm();
+                nav('/home')
+            }
         } catch (e) {
             console.error(e);
             alert('Error the make login')

@@ -72,7 +72,6 @@ export class UsersService {
 
   async updateAsync(id: number, updateUserDto: UpdateUserDto): Promise<User> {
 
-
     if (!Object.keys(updateUserDto).length) {
       throw new BadRequestException('Update data is required');
     }
@@ -122,13 +121,13 @@ export class UsersService {
       const foundUser: User | null = await this.repository.findOne({ where: { email: userDto.email } });
   
       if (!foundUser) {
-        return false;
+        throw new UnauthorizedException();
       }
   
       const isPasswordCorrect: boolean = await CryptoService.compare(userDto.password, foundUser.password);
   
       if (!isPasswordCorrect) {
-        return false;
+        throw new UnauthorizedException();
       }
 
       const payload = { sub: foundUser.id, email: foundUser.email };

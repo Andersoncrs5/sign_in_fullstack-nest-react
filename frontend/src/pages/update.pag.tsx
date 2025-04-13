@@ -26,9 +26,13 @@ export default function Update() {
     async function getUser() {
         try {
             const response = await api.get('users/me'); 
-            const userData = response.data;
-            setName(userData.name);
-            setEmail(userData.email);
+
+            if (response.status == 200) {
+                const userData = response.data;
+                setName(userData.name);
+                setEmail(userData.email);
+            }
+
         } catch (error: any) {
             console.error("Erro:", error);
             if (error.response) {
@@ -49,6 +53,14 @@ export default function Update() {
             };
 
             const response = await api.put('users', user);
+
+            if (response.status == 500 ) {
+                alert('system unavailable try again later');
+            }
+
+            if (response.status == 400 ) {
+                alert('Error data not passed!');
+            }
 
             if (response.status == 200) {
                 nav('/home')
